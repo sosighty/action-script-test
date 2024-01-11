@@ -1,4 +1,5 @@
 import * as core from '@actions/core'
+// import { Client } from '@notionhq/client'
 import { wait } from './wait'
 
 /**
@@ -7,8 +8,18 @@ import { wait } from './wait'
  */
 export async function run(): Promise<void> {
   try {
+    // Initializing a client
+    // const notion = new Client({
+    //   auth: core.getInput('notion_key')
+    // })
+    const key = core.getInput('notion_key')
     const ms: string = core.getInput('milliseconds')
     const url = core.getInput('storybook_url')
+    core.debug(url)
+    core.debug(key)
+
+    // const listUsersResponse = await notion.users.list({})
+    // core.debug(listUsersResponse.results[0].name ?? 'No name')
 
     // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
     core.debug(`Waiting ${ms} milliseconds ...`)

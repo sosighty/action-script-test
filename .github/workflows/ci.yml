@@ -55,7 +55,7 @@ jobs:
         id: test-action
         uses: ./
         with:
-          notion_key: 'test'
+          notion_key: ${{ secrets.NOTION_CHROMATIC_SYNC_SECRET }}
           storybook_url: 'test'
           milliseconds: 2000
         
