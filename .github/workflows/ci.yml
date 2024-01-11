@@ -73,7 +73,7 @@ jobs:
         uses: ./
         with:
           notion_key: ${{ secrets.NOTION_CHROMATIC_SYNC_SECRET }}
-          storybook_url: ${{ steps.fc.outputs }}
+          storybook_url: ${{ steps.fc.outputs.comment-body }}
           milliseconds: 2000
 
       - name: Print Output
