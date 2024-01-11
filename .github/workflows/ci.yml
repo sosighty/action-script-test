@@ -54,8 +54,7 @@ jobs:
       - name: Find Comment
         uses: peter-evans/find-comment@v2
         id: fc
-        with:
-          issue-number: 1
+        with: 
           comment-author: notion-workspace 
       - run: |
           echo ${{ steps.fc.outputs.comment-id }}
