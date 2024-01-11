@@ -9,6 +9,12 @@ branding:
 
 # Define your inputs here.
 inputs:
+  notion_key: 
+    description: "Your input description here"
+    required: true
+  storybook_url:
+    description: "Your input description here"
+    required: true
   milliseconds:
     description: 'Your input description here'
     required: true
