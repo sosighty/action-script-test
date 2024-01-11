@@ -16,7 +16,6 @@ export async function run(): Promise<void> {
     const ms: string = core.getInput('milliseconds')
     const url = core.getInput('storybook_url')
     core.debug(url)
-    core.setOutput('key', key)
 
     // const listUsersResponse = await notion.users.list({})
     // core.debug(listUsersResponse.results[0].name ?? 'No name')
@@ -29,10 +28,10 @@ export async function run(): Promise<void> {
     await wait(parseInt(ms, 10))
     core.debug(new Date().toTimeString())
 
-    core.debug('Hello World!')
-
     // Set outputs for other workflow steps to use
     core.setOutput('time', new Date().toTimeString())
+    core.setOutput('key', key)
+    core.setOutput('url', url)
   } catch (error) {
     // Fail the workflow run if an error occurs
     if (error instanceof Error) core.setFailed(error.message)
