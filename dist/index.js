@@ -2767,6 +2767,7 @@ async function run() {
         core.debug(new Date().toTimeString());
         await (0, wait_1.wait)(parseInt(ms, 10));
         core.debug(new Date().toTimeString());
+        core.debug('Hello World!');
         // Set outputs for other workflow steps to use
         core.setOutput('time', new Date().toTimeString());
     }
