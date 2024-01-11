@@ -14,6 +14,7 @@ export async function run(): Promise<void> {
     const ms: string = core.getInput('milliseconds')
     const key = core.getInput('notion_key')
     const url = core.getInput('storybook_url')
+    const pr = core.getInput('pr_number')
 
     // const lastOrderedIn2023 = await notion.databases.query({
     //   database_id: '9becc544196c467b9a20ee199061ce4f'
@@ -21,6 +22,7 @@ export async function run(): Promise<void> {
 
     core.info(`key: ${key}`)
     core.info(`url: ${url}`)
+    core.info(`pr: ${pr}`)
     // core.info(`lastOrderedIn2023: ${JSON.stringify(lastOrderedIn2023)}`)
 
     // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true

@@ -9,6 +9,9 @@ branding:
 
 # Define your inputs here.
 inputs:
+  pr_number: 
+    description: "Your input description here"
+    required: true
   notion_key: 
     description: "Your input description here"
     required: true
