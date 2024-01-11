@@ -54,9 +54,9 @@ jobs:
       - name: Find Comment
         uses: peter-evans/find-comment@v2
         id: fc
-        with: 
-          repository: ${{ github.repository }}
-          comment-author: notion-workspace 
+        with:
+          issue-number: 1
+          body-includes: search string 1
       - run: |
           echo ${{ steps.fc.outputs.comment-id }}
           echo ${{ steps.fc.outputs.comment-body }}
