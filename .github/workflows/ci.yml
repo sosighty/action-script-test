@@ -55,7 +55,10 @@ jobs:
         id: test-action
         uses: ./
         with:
+          notion_key: 'test'
+          storybook_url: 'test'
           milliseconds: 2000
+        
 
       - name: Print Output
         id: output
