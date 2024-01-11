@@ -1,6 +1,8 @@
 import * as core from '@actions/core'
-// import { Client } from '@notionhq/client'
+import { Client } from '@notionhq/client'
 import { wait } from './wait'
+import { Octokit } from 'octokit'
+// import { createActionAuth } from "@octokit/auth-action";
 
 /**
  * The main function for the action.
@@ -8,22 +10,73 @@ import { wait } from './wait'
  */
 export async function run(): Promise<void> {
   try {
-    // const notion = new Client({
-    //   auth: 'secret_qxTVkGULmKUXuau5t2izqWhciJTWzOjfpfu1zcRyBOs'
-    // })
+    const notion = new Client({
+      auth: 'secret_qxTVkGULmKUXuau5t2izqWhciJTWzOjfpfu1zcRyBOs'
+    })
+
+    const octokit = new Octokit({
+      auth: `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`
+    })
+
+    // Compare: https://docs.github.com/en/rest/reference/users#get-the-authenticated-user
+    const {
+      data: { login }
+    } = await octokit.rest.users.getAuthenticated()
+
     const ms: string = core.getInput('milliseconds')
     const key = core.getInput('notion_key')
     const url = core.getInput('storybook_url')
     const pr = core.getInput('pr_number')
 
-    // const lastOrderedIn2023 = await notion.databases.query({
-    //   database_id: '9becc544196c467b9a20ee199061ce4f'
-    // })
+    const { data: comments } = await octokit.rest.issues.listComments({
+      owner: 'sosighty',
+      repo: 'action-script-test',
+      issue_number: 3
+    })
+
+    const test = JSON.stringify(comments[0].body)
+      .split('?', 2)[0]
+      .split('.so/', 2)[1]
+      .split('-', 2)[1]
+
+    await notion.blocks.children.append({
+      block_id: test,
+      children: [
+        {
+          heading_2: {
+            rich_text: [
+              {
+                text: {
+                  content: 'Recettage'
+                }
+              }
+            ]
+          }
+        },
+        {
+          paragraph: {
+            rich_text: [
+              {
+                text: {
+                  content: `Lien de la story : ${url}`
+                }
+              }
+            ]
+          }
+        }
+      ]
+    })
+
+    const lastOrderedIn2023 = await notion.blocks.children.list({
+      block_id: test
+    })
 
     core.info(`key: ${key}`)
     core.info(`url: ${url}`)
     core.info(`pr: ${pr}`)
-    // core.info(`lastOrderedIn2023: ${JSON.stringify(lastOrderedIn2023)}`)
+    core.info(`login: ${login}`)
+    core.info(`test: ${test}`)
+    core.info(`lastOrderedIn2023: ${JSON.stringify(lastOrderedIn2023)}`)
 
     // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
     core.debug(`Waiting ${ms} milliseconds ...`)

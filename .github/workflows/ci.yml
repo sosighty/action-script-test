@@ -66,12 +66,13 @@ jobs:
         with:
           pr_number: ${{ github.event.pull_request.number }}
           notion_key: ${{ secrets.NOTION_CHROMATIC_SYNC_SECRET }}
-          storybook_url: 'test'
+          storybook_url: 'https://64b69739afd3a23ca6acede8-uyhcvghton.chromatic.com/'
           milliseconds: 2000
       - run: |
           echo "PR: ${{ github.event.pull_request.number }}"
           echo "PR: ${{ github.event.pull_request.patch_url }}"
           echo "PR: ${{ github.event.pull_request.comments }}"
+          echo "PR: ${{ github.event.pull_request.comments_url }}"
 
       - name: Print Output
         id: output
