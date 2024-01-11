@@ -13,8 +13,19 @@ export async function run(): Promise<void> {
     const key = core.getInput('notion_key')
     const url = core.getInput('storybook_url')
 
+    const lastOrderedIn2023 = await notion.databases.query({
+      database_id: '639796aee1b6427eb8cc4d4457c8e946',
+      filter: {
+        property: 'Last ordered',
+        date: {
+          after: '2022-12-31'
+        }
+      }
+    })
+
     core.info(`key: ${key}`)
     core.info(`url: ${url}`)
+    core.info(`lastOrderedIn2023: ${JSON.stringify(lastOrderedIn2023)}`)
 
     // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
     core.debug(`Waiting ${ms} milliseconds ...`)
