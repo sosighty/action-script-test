@@ -1,4 +1,5 @@
 import * as core from '@actions/core'
+import { Client } from '@notionhq/client'
 import { wait } from './wait'
 
 /**
@@ -7,6 +8,7 @@ import { wait } from './wait'
  */
 export async function run(): Promise<void> {
   try {
+    const notion = new Client({ auth: core.getInput('notion_key') })
     const ms: string = core.getInput('milliseconds')
     const key = core.getInput('notion_key')
     const url = core.getInput('storybook_url')
