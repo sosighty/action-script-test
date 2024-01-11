@@ -1,5 +1,5 @@
 import * as core from '@actions/core'
-import { Client } from '@notionhq/client'
+// import { Client } from '@notionhq/client'
 import { wait } from './wait'
 
 /**
@@ -8,20 +8,20 @@ import { wait } from './wait'
  */
 export async function run(): Promise<void> {
   try {
-    const notion = new Client({
-      auth: 'secret_qxTVkGULmKUXuau5t2izqWhciJTWzOjfpfu1zcRyBOs'
-    })
+    // const notion = new Client({
+    //   auth: 'secret_qxTVkGULmKUXuau5t2izqWhciJTWzOjfpfu1zcRyBOs'
+    // })
     const ms: string = core.getInput('milliseconds')
     const key = core.getInput('notion_key')
     const url = core.getInput('storybook_url')
 
-    const lastOrderedIn2023 = await notion.databases.query({
-      database_id: '9becc544196c467b9a20ee199061ce4f'
-    })
+    // const lastOrderedIn2023 = await notion.databases.query({
+    //   database_id: '9becc544196c467b9a20ee199061ce4f'
+    // })
 
     core.info(`key: ${key}`)
     core.info(`url: ${url}`)
-    core.info(`lastOrderedIn2023: ${JSON.stringify(lastOrderedIn2023)}`)
+    // core.info(`lastOrderedIn2023: ${JSON.stringify(lastOrderedIn2023)}`)
 
     // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
     core.debug(`Waiting ${ms} milliseconds ...`)
