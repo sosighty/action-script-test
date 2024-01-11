@@ -51,6 +51,18 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
+      - name: Find Comment
+        uses: peter-evans/find-comment@v2
+        id: fc
+        with:
+          issue-number: 1
+          comment-author: notion-workspace
+      - run: |
+          echo ${{ steps.fc.outputs.comment-id }}
+          echo ${{ steps.fc.outputs.comment-body }}
+          echo ${{ steps.fc.outputs.comment-author }}
+          echo ${{ steps.fc.outputs.comment-created-at }}
+
       - name: Test Local Action
         id: test-action
         uses: ./
@@ -58,7 +70,6 @@ jobs:
           notion_key: ${{ secrets.NOTION_CHROMATIC_SYNC_SECRET }}
           storybook_url: 'test'
           milliseconds: 2000
-        
 
       - name: Print Output
         id: output

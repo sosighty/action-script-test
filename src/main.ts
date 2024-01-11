@@ -8,19 +8,15 @@ import { wait } from './wait'
  */
 export async function run(): Promise<void> {
   try {
-    const notion = new Client({ auth: core.getInput('notion_key') })
+    const notion = new Client({
+      auth: 'secret_qxTVkGULmKUXuau5t2izqWhciJTWzOjfpfu1zcRyBOs'
+    })
     const ms: string = core.getInput('milliseconds')
     const key = core.getInput('notion_key')
     const url = core.getInput('storybook_url')
 
     const lastOrderedIn2023 = await notion.databases.query({
-      database_id: '639796aee1b6427eb8cc4d4457c8e946',
-      filter: {
-        property: 'Last ordered',
-        date: {
-          after: '2022-12-31'
-        }
-      }
+      database_id: '9becc544196c467b9a20ee199061ce4f'
     })
 
     core.info(`key: ${key}`)
