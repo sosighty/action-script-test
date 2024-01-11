@@ -16,7 +16,7 @@ export async function run(): Promise<void> {
     const ms: string = core.getInput('milliseconds')
     const url = core.getInput('storybook_url')
     core.debug(url)
-    core.info(key)
+    core.setOutput('key', key)
 
     // const listUsersResponse = await notion.users.list({})
     // core.debug(listUsersResponse.results[0].name ?? 'No name')
