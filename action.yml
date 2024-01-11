@@ -15,9 +15,10 @@ inputs:
   storybook_url:
     description: "Your input description here"
     required: true
+    default: 'https://storybook.localhost'
   milliseconds:
     description: 'Your input description here'
-    required: false
+    required: true
     default: '1000'
 
 # Define your outputs here.

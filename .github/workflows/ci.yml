@@ -58,10 +58,8 @@ jobs:
           notion_key: ${{ secrets.NOTION_CHROMATIC_SYNC_SECRET }}
           storybook_url: 'test'
           milliseconds: 2000
+        
 
       - name: Print Output
         id: output
-        run: | 
-          echo "${{ steps.test-action.outputs.time }}"
-          echo "${{ steps.test-action.outputs.key }}"
-          echo "${{ steps.test-action.outputs.url }}"
+        run: echo "${{ steps.test-action.outputs.time }}"
