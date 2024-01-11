@@ -64,3 +64,4 @@ jobs:
         run: | 
           echo "${{ steps.test-action.outputs.time }}"
           echo "${{ steps.test-action.outputs.key }}"
+          echo "${{ steps.test-action.outputs.url }}"
