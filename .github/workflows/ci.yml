@@ -66,8 +66,12 @@ jobs:
         with:
           pr_number: ${{ github.event.pull_request.number }}
           notion_key: ${{ secrets.NOTION_CHROMATIC_SYNC_SECRET }}
-          storybook_url: ${{ steps.fc.outputs.comment-body }}
+          storybook_url: 'test'
           milliseconds: 2000
+      - run: |
+          echo "PR: ${{ github.event.pull_request.number }}"
+          echo "PR: ${{ github.event.pull_request.patch_url }}"
+          echo "PR: ${{ github.event.pull_request.comments }}"
 
       - name: Print Output
         id: output
