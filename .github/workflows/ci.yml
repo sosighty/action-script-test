@@ -56,7 +56,7 @@ jobs:
         id: fc
         with:
           issue-number: 1
-          comment-author: notion-workspace
+          comment-author: notion-workspace 
       - run: |
           echo ${{ steps.fc.outputs.comment-id }}
           echo ${{ steps.fc.outputs.comment-body }}
