@@ -9,17 +9,19 @@ branding:
 
 # Define your inputs here.
 inputs:
-  notion_key: 
-    description: "Your input description here"
-    required: true
-  storybook_url:
-    description: "Your input description here"
-    required: true
-    default: 'https://storybook.localhost'
-  milliseconds:
+  pr_number:
     description: 'Your input description here'
     required: true
-    default: '1000'
+  notion_token:
+    description: 'Your input description here'
+    required: true
+  octokit_token:
+    description: 'Your input description here'
+    required: true
+  storyUrl:
+    description: 'Your input description here'
+    required: true
+    default: 'https://storybook.localhost'
 
 # Define your outputs here.
 outputs:
