@@ -11,7 +11,7 @@ import { Octokit } from 'octokit'
 export async function run(): Promise<void> {
   try {
     const notion = new Client({
-      auth: 'secret_qxTVkGULmKUXuau5t2izqWhciJTWzOjfpfu1zcRyBOs'
+      auth: core.getInput('notion_token')
     })
 
     const octokit = new Octokit({
@@ -23,10 +23,8 @@ export async function run(): Promise<void> {
       data: { login }
     } = await octokit.rest.users.getAuthenticated()
 
-    const ms: string = core.getInput('milliseconds')
-    const key = core.getInput('notion_key')
-    const url = core.getInput('storybook_url')
-    const pr = core.getInput('pr_number')
+    const storyUrl = core.getInput('storyUrl')
+    const prNumber = core.getInput('pr_number')
 
     const { data: comments } = await octokit.rest.issues.listComments({
       owner: 'sosighty',
@@ -58,7 +56,7 @@ export async function run(): Promise<void> {
             rich_text: [
               {
                 text: {
-                  content: `Lien de la story : ${url}`
+                  content: `Lien de la story : ${storyUrl}`
                 }
               }
             ]
@@ -71,20 +69,11 @@ export async function run(): Promise<void> {
       block_id: test
     })
 
-    core.info(`key: ${key}`)
-    core.info(`url: ${url}`)
-    core.info(`pr: ${pr}`)
+    core.info(`url: ${storyUrl}`)
+    core.info(`pr: ${prNumber}`)
     core.info(`login: ${login}`)
     core.info(`test: ${test}`)
     core.info(`lastOrderedIn2023: ${JSON.stringify(lastOrderedIn2023)}`)
-
-    // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-    core.debug(`Waiting ${ms} milliseconds ...`)
-
-    // Log the current timestamp, wait, then log the new timestamp
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
 
     // Set outputs for other workflow steps to use
     core.setOutput('time', new Date().toTimeString())

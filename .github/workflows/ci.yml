@@ -65,10 +65,9 @@ jobs:
         uses: ./
         with:
           pr_number: ${{ github.event.pull_request.number }}
-          notion_key: ${{ secrets.NOTION_CHROMATIC_SYNC_SECRET }}
+          notion_token: ${{ secrets.NOTION_CHROMATIC_SYNC_SECRET }}
           octokit_token: ${{ secrets.GITHUB_TOKEN }}
-          storybook_url: 'https://64b69739afd3a23ca6acede8-uyhcvghton.chromatic.com/'
-          milliseconds: 2000
+          storyUrl: 'https://64b69739afd3a23ca6acede8-uyhcvghton.chromatic.com/'
       - run: |
           echo "PR: ${{ github.event.pull_request.number }}"
           echo "PR: ${{ github.event.pull_request.patch_url }}"
