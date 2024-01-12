@@ -9,6 +9,12 @@ branding:
 
 # Define your inputs here.
 inputs:
+  repo:
+    description: 'Your input description here'
+    required: true
+  owner:
+    description: 'Your input description here'
+    required: true
   pr_number:
     description: 'Your input description here'
     required: true

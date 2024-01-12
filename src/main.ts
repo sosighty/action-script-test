@@ -22,8 +22,8 @@ export async function run(): Promise<void> {
     const prNumber = core.getInput('pr_number')
 
     const { data: comments } = await octokit.rest.issues.listComments({
-      owner: 'sosighty',
-      repo: 'action-script-test',
+      owner: core.getInput('owner'),
+      repo: core.getInput('repo'),
       issue_number: 3
     })
 

@@ -24616,8 +24616,8 @@ async function run() {
         const storyUrl = core.getInput('storyUrl');
         const prNumber = core.getInput('pr_number');
         const { data: comments } = await octokit.rest.issues.listComments({
-            owner: 'sosighty',
-            repo: 'action-script-test',
+            owner: core.getInput('owner'),
+            repo: core.getInput('repo'),
             issue_number: 3
         });
         const test = JSON.stringify(comments[0].body)
