@@ -1,7 +1,7 @@
 import * as core from '@actions/core'
-// import { Client } from '@notionhq/client'
-// import { wait } from './wait'
-// import { Octokit } from 'octokit'
+import { Client } from '@notionhq/client'
+import { wait } from './wait'
+import { Octokit } from 'octokit'
 // import { createActionAuth } from "@octokit/auth-action";
 
 /**
@@ -10,67 +10,66 @@ import * as core from '@actions/core'
  */
 export async function run(): Promise<void> {
   try {
-    // const notion = new Client({
-    //   auth: core.getInput('notion_token')
-    // })
+    const notion = new Client({
+      auth: core.getInput('notion_token')
+    })
 
-    // const octokit = new Octokit({
-    //   auth: core.getInput('octokit_token')
-    // })
+    const octokit = new Octokit({
+      auth: core.getInput('octokit_token')
+    })
 
-    // const storyUrl = core.getInput('storyUrl')
-    // const prNumber = core.getInput('pr_number')
+    const storyUrl = core.getInput('storyUrl')
+    const prNumber = core.getInput('pr_number')
+    const owner = core.getInput('repo').split('/', 2)[0]
+    const repo = core.getInput('repo').split('/', 2)[1]
 
-    // const { data: comments } = await octokit.rest.issues.listComments({
-    //   owner: core.getInput('owner'),
-    //   repo: core.getInput('repo'),
-    //   issue_number: 3
-    // })
+    const { data: comments } = await octokit.rest.issues.listComments({
+      owner,
+      repo,
+      issue_number: 3
+    })
 
-    // const test = JSON.stringify(comments[0].body)
-    //   .split('?', 2)[0]
-    //   .split('.so/', 2)[1]
-    //   .split('-', 2)[1]
+    const test = JSON.stringify(comments[0].body)
+      .split('?', 2)[0]
+      .split('.so/', 2)[1]
+      .split('-', 2)[1]
 
-    // await notion.blocks.children.append({
-    //   block_id: test,
-    //   children: [
-    //     {
-    //       heading_2: {
-    //         rich_text: [
-    //           {
-    //             text: {
-    //               content: 'Recettage'
-    //             }
-    //           }
-    //         ]
-    //       }
-    //     },
-    //     {
-    //       paragraph: {
-    //         rich_text: [
-    //           {
-    //             text: {
-    //               content: `Lien de la story : ${storyUrl}`
-    //             }
-    //           }
-    //         ]
-    //       }
-    //     }
-    //   ]
-    // })
+    await notion.blocks.children.append({
+      block_id: test,
+      children: [
+        {
+          heading_2: {
+            rich_text: [
+              {
+                text: {
+                  content: 'Recettage'
+                }
+              }
+            ]
+          }
+        },
+        {
+          paragraph: {
+            rich_text: [
+              {
+                text: {
+                  content: `Lien de la story : ${storyUrl}`
+                }
+              }
+            ]
+          }
+        }
+      ]
+    })
 
-    // const lastOrderedIn2023 = await notion.blocks.children.list({
-    //   block_id: test
-    // })
+    const lastOrderedIn2023 = await notion.blocks.children.list({
+      block_id: test
+    })
 
-    // core.info(`url: ${storyUrl}`)
-    // core.info(`pr: ${prNumber}`)
-    // core.info(`test: ${test}`)
-    // core.info(`lastOrderedIn2023: ${JSON.stringify(lastOrderedIn2023)}`)
-
-    core.info(`owner: ${core.getInput('owner')}`)
-    core.info(`repo: ${core.getInput('repo')}`)
+    core.info(`url: ${storyUrl}`)
+    core.info(`pr: ${prNumber}`)
+    core.info(`test: ${test}`)
+    core.info(`lastOrderedIn2023: ${JSON.stringify(lastOrderedIn2023)}`)
 
     // Set outputs for other workflow steps to use
     core.setOutput('time', new Date().toTimeString())

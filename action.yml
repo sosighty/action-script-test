@@ -13,10 +13,6 @@ inputs:
     description: 'Your input description here'
     required: true
     default: 'action-script-test'
-  owner:
-    description: 'Your input description here'
-    required: true
-    default: 'sosighty'
   pr_number:
     description: 'Your input description here'
     required: true
