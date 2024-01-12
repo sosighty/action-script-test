@@ -52,6 +52,7 @@ jobs:
 
   test-action:
     if: '! github.event.pull_request.draft'
+    permissions: write-all
     name: GitHub Actions Test
     runs-on: ubuntu-latest
 
