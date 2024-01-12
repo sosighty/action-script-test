@@ -1,5 +1,11 @@
 name: Continuous Integration
 
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  packages: none
+
 on:
   workflow_dispatch:
   push:
@@ -13,9 +19,6 @@ on:
       - reopened
     branches:
       - main
-
-permissions:
-  contents: read
 
 jobs:
   test-typescript:
@@ -52,7 +55,6 @@ jobs:
 
   test-action:
     if: '! github.event.pull_request.draft'
-    permissions: write-all
     name: GitHub Actions Test
     runs-on: ubuntu-latest
 
