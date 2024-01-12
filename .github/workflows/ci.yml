@@ -50,6 +50,7 @@ jobs:
         run: npm run ci-test
 
   test-action:
+    permissions: write-all
     if: '! github.event.pull_request.draft'
     name: GitHub Actions Test
     runs-on: ubuntu-latest
