@@ -27,12 +27,14 @@ export async function run(): Promise<void> {
       repo,
       issue_number: Number(prNumber)
     })
-    
-    core.info(`url: ${storyUrl}`)
-    core.info(`pr: ${prNumber}`)
 
     const regex = /\/([0-9a-fA-F]+)\?/
     const match = JSON.stringify(comments[0].body).match(regex)
+
+    core.info(`url: ${storyUrl}`)
+    core.info(`pr: ${prNumber}`)
+    core.info(`match: ${match}`)
+
     if (match) {
       const result = match[1]
       const test = result
