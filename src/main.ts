@@ -1,6 +1,5 @@
 import * as core from '@actions/core'
 import { Client } from '@notionhq/client'
-import { wait } from './wait'
 import { Octokit } from 'octokit'
 // import { createActionAuth } from "@octokit/auth-action";
 
@@ -28,51 +27,55 @@ export async function run(): Promise<void> {
       repo,
       issue_number: Number(prNumber)
     })
+    const regex = /\/([0-9a-fA-F]+)\?/
+    const match = JSON.stringify(comments[0].body).match(regex)
+    if (match) {
+      const result = match[1]
+      const test = result
+      core.info(`matching id: ${test}`)
 
-    const test = JSON.stringify(comments[0].body)
-      .split('?', 2)[0]
-      .split('.so/', 2)[1]
-      .split('-', 2)[1]
-
-    await notion.blocks.children.append({
-      block_id: test,
-      children: [
-        {
-          heading_2: {
-            rich_text: [
-              {
-                text: {
-                  content: 'Recettage'
+      await notion.blocks.children.append({
+        block_id: test,
+        children: [
+          {
+            heading_2: {
+              rich_text: [
+                {
+                  text: {
+                    content: 'Recettage'
+                  }
                 }
-              }
-            ]
-          }
-        },
-        {
-          paragraph: {
-            rich_text: [
-              {
-                text: {
-                  content: `Lien de la story : ${storyUrl}`
+              ]
+            }
+          },
+          {
+            paragraph: {
+              rich_text: [
+                {
+                  text: {
+                    content: `Lien de la story : ${storyUrl}`
+                  }
                 }
-              }
-            ]
+              ]
+            }
           }
-        }
-      ]
-    })
+        ]
+      })
 
-    const lastOrderedIn2023 = await notion.blocks.children.list({
-      block_id: test
-    })
+      const lastOrderedIn2023 = await notion.blocks.children.list({
+        block_id: test
+      })
 
-    core.info(`url: ${storyUrl}`)
-    core.info(`pr: ${prNumber}`)
-    core.info(`test: ${test}`)
-    core.info(`lastOrderedIn2023: ${JSON.stringify(lastOrderedIn2023)}`)
+      core.info(`url: ${storyUrl}`)
+      core.info(`pr: ${prNumber}`)
+      core.info(`test: ${test}`)
+      core.info(`lastOrderedIn2023: ${JSON.stringify(lastOrderedIn2023)}`)
 
-    // Set outputs for other workflow steps to use
-    core.setOutput('time', new Date().toTimeString())
+      // Set outputs for other workflow steps to use
+      core.setOutput('time', new Date().toTimeString())
+    } else {
+      throw new Error('No matching notion url found')
+    }
   } catch (error) {
     // Fail the workflow run if an error occurs
     if (error instanceof Error) core.setFailed(error.message)
