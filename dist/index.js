@@ -24620,7 +24620,7 @@ async function run() {
         const { data: comments } = await octokit.rest.issues.listComments({
             owner,
             repo,
-            issue_number: 3
+            issue_number: Number(prNumber)
         });
         const test = JSON.stringify(comments[0].body)
             .split('?', 2)[0]
