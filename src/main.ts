@@ -20,10 +20,12 @@ export async function run(): Promise<void> {
 
     const storyUrl = core.getInput('storyUrl')
     const prNumber = core.getInput('pr_number')
+    const owner = core.getInput('repo').split('/', 2)[0]
+    const repo = core.getInput('repo').split('/', 2)[1]
 
     const { data: comments } = await octokit.rest.issues.listComments({
-      owner: 'sosighty',
-      repo: 'action-script-test',
+      owner,
+      repo,
       issue_number: 3
     })
 
