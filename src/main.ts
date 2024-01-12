@@ -15,7 +15,7 @@ export async function run(): Promise<void> {
     })
 
     const octokit = new Octokit({
-      auth: `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`
+      auth: core.getInput('octokit_token')
     })
 
     // Compare: https://docs.github.com/en/rest/reference/users#get-the-authenticated-user

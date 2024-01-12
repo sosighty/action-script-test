@@ -66,6 +66,7 @@ jobs:
         with:
           pr_number: ${{ github.event.pull_request.number }}
           notion_key: ${{ secrets.NOTION_CHROMATIC_SYNC_SECRET }}
+          octokit_token: ${{ secrets.GITHUB_TOKEN }}
           storybook_url: 'https://64b69739afd3a23ca6acede8-uyhcvghton.chromatic.com/'
           milliseconds: 2000
       - run: |
