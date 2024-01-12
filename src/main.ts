@@ -32,7 +32,7 @@ export async function run(): Promise<void> {
     if (match) {
       const result = match[1]
       const test = result
-      core.info(`matching id: ${test}`)
+      core.info(`test matching id: ${test}`)
 
       await notion.blocks.children.append({
         block_id: test,
