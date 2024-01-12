@@ -18,11 +18,6 @@ export async function run(): Promise<void> {
       auth: core.getInput('octokit_token')
     })
 
-    // Compare: https://docs.github.com/en/rest/reference/users#get-the-authenticated-user
-    const {
-      data: { login }
-    } = await octokit.rest.users.getAuthenticated()
-
     const storyUrl = core.getInput('storyUrl')
     const prNumber = core.getInput('pr_number')
 
@@ -71,7 +66,6 @@ export async function run(): Promise<void> {
 
     core.info(`url: ${storyUrl}`)
     core.info(`pr: ${prNumber}`)
-    core.info(`login: ${login}`)
     core.info(`test: ${test}`)
     core.info(`lastOrderedIn2023: ${JSON.stringify(lastOrderedIn2023)}`)
 
