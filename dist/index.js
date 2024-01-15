@@ -24615,17 +24615,17 @@ async function run() {
         });
         const storyUrl = core.getInput('storyUrl');
         const prNumber = core.getInput('pr_number');
-        const owner = core.getInput('repo').split('/', 2)[0];
-        const repo = core.getInput('repo').split('/', 2)[1];
+        const [owner, repo] = core.getInput('repo').split('/');
         const { data: comments } = await octokit.rest.issues.listComments({
             owner,
             repo,
             issue_number: Number(prNumber)
         });
-        core.info(`url: ${storyUrl}`);
-        core.info(`pr: ${prNumber}`);
         const regex = /\/([0-9a-fA-F]+)\?/;
         const match = JSON.stringify(comments[0].body).match(regex);
+        core.info(`url: ${storyUrl}`);
+        core.info(`pr: ${prNumber}`);
+        core.info(`match: ${match}`);
         if (match) {
             const result = match[1];
             const test = result;
@@ -24657,13 +24657,13 @@ async function run() {
                     }
                 ]
             });
-            const lastOrderedIn2023 = await notion.blocks.children.list({
+            const content = await notion.blocks.children.list({
                 block_id: test
             });
             core.info(`url: ${storyUrl}`);
-            core.info(`pr: ${prNumber}`);
-            core.info(`test: ${test}`);
-            core.info(`lastOrderedIn2023: ${JSON.stringify(lastOrderedIn2023)}`);
+            // core.info(`pr: ${prNumber}`)
+            // core.info(`test: ${test}`)
+            core.info(`card content: ${JSON.stringify(content)}`);
             // Set outputs for other workflow steps to use
             core.setOutput('time', new Date().toTimeString());
         }

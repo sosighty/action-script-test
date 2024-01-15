@@ -19,8 +19,7 @@ export async function run(): Promise<void> {
 
     const storyUrl = core.getInput('storyUrl')
     const prNumber = core.getInput('pr_number')
-    const owner = core.getInput('repo').split('/', 2)[0]
-    const repo = core.getInput('repo').split('/', 2)[1]
+    const [owner, repo] = core.getInput('repo').split('/');
 
     const { data: comments } = await octokit.rest.issues.listComments({
       owner,
@@ -68,14 +67,14 @@ export async function run(): Promise<void> {
         ]
       })
 
-      const lastOrderedIn2023 = await notion.blocks.children.list({
+      const content = await notion.blocks.children.list({
         block_id: test
       })
 
       core.info(`url: ${storyUrl}`)
-      core.info(`pr: ${prNumber}`)
-      core.info(`test: ${test}`)
-      core.info(`lastOrderedIn2023: ${JSON.stringify(lastOrderedIn2023)}`)
+      // core.info(`pr: ${prNumber}`)
+      // core.info(`test: ${test}`)
+      core.info(`card content: ${JSON.stringify(content)}`)
 
       // Set outputs for other workflow steps to use
       core.setOutput('time', new Date().toTimeString())
