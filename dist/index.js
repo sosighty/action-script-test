@@ -24623,7 +24623,7 @@ async function run() {
             repo,
             issue_number: Number(prNumber)
         });
-        const regex = /\/([0-9a-fA-F]+)\?/;
+        const regex = /\/([^\/]+)$/;
         const match = JSON.stringify(comments[0].body).match(regex);
         core.info(`url: ${storyUrl}`);
         core.info(`pr: ${prNumber}`);
