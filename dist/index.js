@@ -24661,7 +24661,7 @@ async function run() {
                 block_id: test
             });
             core.info(`url: ${storyUrl}`);
-            // core.info(`pr: ${prNumber}`)
+            core.info(`pr: ${prNumber}`);
             // core.info(`test: ${test}`)
             core.info(`card content: ${JSON.stringify(content)}`);
             // Set outputs for other workflow steps to use

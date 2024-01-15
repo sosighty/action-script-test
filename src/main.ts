@@ -19,7 +19,7 @@ export async function run(): Promise<void> {
 
     const storyUrl = core.getInput('storyUrl')
     const prNumber = core.getInput('pr_number')
-    const [owner, repo] = core.getInput('repo').split('/');
+    const [owner, repo] = core.getInput('repo').split('/')
 
     const { data: comments } = await octokit.rest.issues.listComments({
       owner,
@@ -72,7 +72,7 @@ export async function run(): Promise<void> {
       })
 
       core.info(`url: ${storyUrl}`)
-      // core.info(`pr: ${prNumber}`)
+      core.info(`pr: ${prNumber}`)
       // core.info(`test: ${test}`)
       core.info(`card content: ${JSON.stringify(content)}`)
 
